@@ -5,7 +5,6 @@
 #
 class python::params {
   $ensure                    = 'present'
-  $version                   = 'system'
   $pip                       = 'present'
   $dev                       = 'absent'
   $virtualenv                = 'absent'
@@ -47,4 +46,9 @@ class python::params {
 
   $anaconda_installer_url = 'https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh'
   $anaconda_install_path = '/opt/python'
+
+  $version = fact('os.release.major') ? {
+    '20.04' => '3',
+    default => 'system',
+  }
 }
